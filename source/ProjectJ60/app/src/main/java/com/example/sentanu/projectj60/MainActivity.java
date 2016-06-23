@@ -10,9 +10,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    
+
     //coba satu fungsi
     public void fungsiPercobaan(){
+
+    }
+    //coba satu fungsi baru
+    public void fungsiPercobaanBaru(){
 
     }
 }
