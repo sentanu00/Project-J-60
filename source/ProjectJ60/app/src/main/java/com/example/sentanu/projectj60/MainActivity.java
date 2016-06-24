@@ -11,12 +11,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    //coba satu fungsi
-    public void fungsiPercobaan(){
 
-    }
-    //coba satu fungsi baru
-    public void fungsiPercobaanBaru(){
-
-    }
 }
