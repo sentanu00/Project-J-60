@@ -51,8 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mylocation = new LatLng(location.getLatitude(),location.getLongitude());
         //----------------------------------------------------------------------------------------------
         //set button search target on---------------------------------------------------------------
-        GTTarget.setVisibility(View.GONE);
-        GTMyloc.setVisibility(View.VISIBLE);
+        GTTarget.setVisibility(View.VISIBLE);
+        GTMyloc.setVisibility(View.GONE);
 
         GTTarget.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         checkPermisionMyLocation();
 
         //setting kamera
-        setingKamera(this.target);
+        setingKamera(this.mylocation);
 
         //radius luar
         buatLingkaran(radius,radRadius);
