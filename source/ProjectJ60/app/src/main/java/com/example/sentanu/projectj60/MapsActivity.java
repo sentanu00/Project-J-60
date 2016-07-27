@@ -1,6 +1,7 @@
 package com.example.sentanu.projectj60;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -27,7 +28,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String namaQuest, latRadius, longiRadius, latTarget, longiTarget;
     LatLng radius, target;
     int radRadius, radTarget;
-    Button GTTarget, GTMyloc;
+    Button GTTarget, GTMyloc, btn_camera;
     LatLng mylocation;//-----------------------------------------------------------------lokasi user
     private LocationManager locManager;
 
@@ -44,6 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         GTTarget = (Button)findViewById(R.id.btn_go_to_target);
         GTMyloc = (Button)findViewById(R.id.btn_go_to_myloc);
+        btn_camera = (Button)findViewById(R.id.btn_camera);
 
         //---------------------------------------------------------------------------------------------- ambil lokasi user
         locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -52,7 +54,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //----------------------------------------------------------------------------------------------
         //set button search target on---------------------------------------------------------------
         GTTarget.setVisibility(View.VISIBLE);
-        GTMyloc.setVisibility(View.GONE);
+        GTMyloc.setVisibility(View.GONE);btn_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(set_button_camera_in_radius(target,mylocation,radRadius)){
+                    Toast.makeText(MapsActivity.this, "button camera bisa", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent();
+                    i.setClass(MapsActivity.this, kamera.class);
+                    startActivity(i);
+                }else{
+                    Toast.makeText(MapsActivity.this, "disable", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         GTTarget.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +146,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //radius luar
         buatLingkaran(radius,radRadius);
 
+        //buat marker
+        buatMarker(target,R.mipmap.market_keris_100,"lokasi Quest 1");
+
+
         //radius dalam
         //harusnya yang ini  tidak prlu di gambarkan, namun hanya perlu berupa notifikasi
         // bahwa anda telah berada di tempat yg benar
@@ -152,6 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //fungsi ini bertujuan untuk perpindahan tampilan marker entah itu my location atau posisi POI
+    //fungsi ini bertujuan untuk perpindahan tampilan marker entah itu my location atau posisi POI
     public void setingKamera(LatLng target){
 
         //aktifkan zoom in pada kamera
@@ -163,11 +183,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mengatur fokus pada tampilan target
         CameraPosition cm = new CameraPosition.Builder()
                 .target(target)     //sementara target ada di luar
-                .zoom(15)
-                .tilt(30)
+                .zoom(17)
+                .tilt(60)
                 .build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cm));
     }
+
 
     //buat marker niatnya mau dirubah ke custom snippet agar waktu marker di klik
     //muncul gambar dan keterangan
@@ -194,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //bila posisi device berada dalam radius POI maka button bisa di klik, begitu juga sebaliknya.
-    public Boolean set_button_camera_in_radius(LatLng myLoc, LatLng targetLoc){
+    public Boolean set_button_camera_in_radius(LatLng myLoc, LatLng targetLoc, int radiusGeofance){
         Location loc1 = new Location("");
         loc1.setLatitude(myLoc.latitude);
         loc1.setLongitude(myLoc.longitude);

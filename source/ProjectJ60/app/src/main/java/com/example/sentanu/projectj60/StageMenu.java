@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,11 +23,23 @@ public class StageMenu extends AppCompatActivity implements AdapterView.OnItemCl
     ArrayList<HashMap<String, String>> mylist;
     String[] no_quest, title_quest, status;
     String[] gambar;
+    Button signupLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_menu);
+
+        signupLogin = (Button)findViewById(R.id.signup_login);
+        signupLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Then you start a new Activity via Intent
+                Intent i = new Intent();
+                i.setClass(StageMenu.this, signup.class);
+                startActivity(i);
+            }
+        });
 
         listview = (ListView) findViewById(R.id.list_stage_id);
 
@@ -65,25 +78,32 @@ public class StageMenu extends AppCompatActivity implements AdapterView.OnItemCl
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
         // Then you start a new Activity via Intent
         Intent i = new Intent();
-        i.setClass(this, MapsActivity.class);
+        if(id==0){
+            i.setClass(this, Status_Quest.class);
+            startActivity(i);
 
-        // digunakan untuk mengirim data menggunakan intent
-        i.putExtra("nama_quest", "Quest 1");
+        }else{
 
-        //catatan untuk radius atau apapun ber ekstensi "Double" bila akan di share melalui
-        // intent, covert ke "String" terlebih dahulu seperti latRadius dan lonRadius di
-        // bawah ini
-        i.putExtra("latRadius", "-6.9295007");
-        i.putExtra("lonRadius", "107.6080578");
-        i.putExtra("radRadius", 100);
-        i.putExtra("latTarget", "-6.9295007");
-        i.putExtra("lonTarget", "107.6080578");
-        i.putExtra("radTarget", 20);
-        //intent.putExtra("position", position);
-        // Or / And
-        //intent.putExtra("id", id);
+            i.setClass(this, MapsActivity.class);
 
-        startActivity(i);
+            // digunakan untuk mengirim data menggunakan intent
+            i.putExtra("nama_quest", "Quest 1");
+
+            //catatan untuk radius atau apapun ber ekstensi "Double" bila akan di share melalui
+            // intent, covert ke "String" terlebih dahulu seperti latRadius dan lonRadius di
+            // bawah ini
+            i.putExtra("latRadius", "-6.9295007");
+            i.putExtra("lonRadius", "107.6080578");
+            i.putExtra("radRadius", 100);
+            i.putExtra("latTarget", "-6.9295007");
+            i.putExtra("lonTarget", "107.6080578");
+            i.putExtra("radTarget", 20);
+            //intent.putExtra("position", position);
+            // Or / And
+            //intent.putExtra("id", id);
+
+            startActivity(i);
+        }
 
     }
 }
