@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         />
     <TextView
-        android:id="@+id/no_quest"
+        android:id="@+id/id_quest"
         android:layout_toRightOf="@+id/gambar"
         android:text="Quest 1"
         android:layout_width="wrap_content"
@@ -23,23 +23,23 @@
         android:typeface="sans" />
 
     <TextView
-        android:id="@+id/title_quest"
+        android:id="@+id/judul_quest"
         android:text="Awal Dimulainya Misteri"
         android:layout_toRightOf="@+id/gambar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/no_quest"
+        android:layout_below="@id/id_quest"
         android:layout_marginTop="5dip"
         android:textColor="#343434"
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/status_quest"
         android:text="completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/title"
-        android:layout_alignBottom="@+id/title"
+        android:layout_alignBaseline="@+id/judul_quest"
+        android:layout_alignBottom="@+id/judul_quest"
         android:layout_alignParentRight="true"
         android:textColor="#343434"
         android:textSize="12sp" />
