@@ -20,18 +20,11 @@
             android:id="@+id/btn_go_to_target"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:background="@mipmap/location_marker"
-            android:scaleType="fitXY"/>
-        <Button
-            android:id="@+id/btn_go_to_myloc"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:scaleType="fitXY"
-            android:background="@mipmap/location_user"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <Button
             android:id="@+id/btn_camera"
             android:padding="16dp"

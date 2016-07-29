@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -53,6 +54,7 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
     View dialogView;
+    Button signup_login;
 
 
     Button signupLogin;
@@ -90,7 +92,7 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
 
         swipe   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         list    = (ListView) findViewById(R.id.list_stage_id);
-
+        signupLogin = (Button)findViewById(R.id.signup_login);
 
         // untuk mengisi data dari JSON ke dalam adapter
         adapter = new Adapter(StageMenu.this, itemList);
@@ -110,6 +112,53 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
                    }
         );
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //get data pada itemlist.. hehee.. akhirnya bisa..:D
+                final String id_questx = itemList.get(position).getId_quest();
+
+                Toast.makeText(StageMenu.this,"id_quest : "+ id_questx, Toast.LENGTH_SHORT).show();
+                Toast.makeText(StageMenu.this,"position : "+ position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(StageMenu.this,"id       : "+ id, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent();
+                i.setClass(StageMenu.this, MapsActivity.class);
+
+                // digunakan untuk mengirim data menggunakan intent
+                i.putExtra("nama_quest", "Quest 1");
+
+                //catatan untuk radius atau apapun ber ekstensi "Double" bila akan di share melalui
+                // intent, covert ke "String" terlebih dahulu seperti latRadius dan lonRadius di
+                // bawah ini
+                i.putExtra("latRadius", "-6.9295007");
+                i.putExtra("lonRadius", "107.6080578");
+                i.putExtra("radRadius", 100);
+                i.putExtra("latTarget", "-6.9295007");
+                i.putExtra("lonTarget", "107.6080578");
+                i.putExtra("radTarget", 20);
+                //intent.putExtra("position", position);
+                // Or / And
+                //intent.putExtra("id", id);
+
+                startActivity(i);
+            }
+        });
+
+        signupLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StageMenu.this,"hai..:D", Toast.LENGTH_SHORT).show();
+
+
+                Intent i = new Intent();
+                i.setClass(StageMenu.this, signup.class);
+
+                startActivity(i);
+
+            }
+        });
 
 
 

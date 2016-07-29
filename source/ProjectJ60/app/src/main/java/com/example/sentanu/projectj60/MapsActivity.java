@@ -44,17 +44,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         GTTarget = (Button)findViewById(R.id.btn_go_to_target);
-        GTMyloc = (Button)findViewById(R.id.btn_go_to_myloc);
+        //GTMyloc = (Button)findViewById(R.id.btn_go_to_myloc);
         btn_camera = (Button)findViewById(R.id.btn_camera);
 
         //---------------------------------------------------------------------------------------------- ambil lokasi user
-        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        /*locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location =  locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         mylocation = new LatLng(location.getLatitude(),location.getLongitude());
-        //----------------------------------------------------------------------------------------------
+        *///----------------------------------------------------------------------------------------------
         //set button search target on---------------------------------------------------------------
-        GTTarget.setVisibility(View.VISIBLE);
-        GTMyloc.setVisibility(View.GONE);btn_camera.setOnClickListener(new View.OnClickListener() {
+
+        /*GTMyloc.setVisibility(View.GONE);btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(set_button_camera_in_radius(target,mylocation,radRadius)){
@@ -67,24 +67,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
             }
+        });*/
+
+        btn_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //GoogleMap.OnMyLocationButtonClickListener;
+            }
         });
 
         GTTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GTTarget.setVisibility(View.GONE);
-                GTMyloc.setVisibility(View.VISIBLE);
                 setingKamera(target);
             }
         });
-        GTMyloc.setOnClickListener(new View.OnClickListener() {
+        /*GTMyloc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GTTarget.setVisibility(View.VISIBLE);
                 GTMyloc.setVisibility(View.GONE);
                 setingKamera(mylocation);
             }
-        });
+        });*/
 
 
         //ambil data yang dikirim dari MainActovoty.java
@@ -135,13 +140,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         //non aktifkan tombol mylocation pojok kanan atas
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         //cek permission gps
         checkPermisionMyLocation();
 
         //setting kamera
-        setingKamera(this.mylocation);
+        setingKamera(this.target);
 
         //radius luar
         buatLingkaran(radius,radRadius);
