@@ -1,7 +1,9 @@
 package com.example.sentanu.projectj60;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -25,14 +27,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
-    String namaQuest, latRadius, longiRadius, latTarget, longiTarget;
-    LatLng radius, target;
+    private static String namaQuest, latRadius, longiRadius, latTarget, longiTarget;
+    private static LatLng radius, target;
     int radRadius, radTarget;
     Button GTTarget, GTMyloc, btn_camera;
     LatLng mylocation;//-----------------------------------------------------------------lokasi user
     private LocationManager locManager;
 
-    private GoogleMap mMap;
+
+    LocationManager locationManager;
+    PendingIntent pendingIntent;
+    SharedPreferences sharedPreferences;
+
+    private static GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GTTarget = (Button)findViewById(R.id.btn_go_to_target);
         //GTMyloc = (Button)findViewById(R.id.btn_go_to_myloc);
         btn_camera = (Button)findViewById(R.id.btn_camera);
+
+
+        // Getting LocationManager object from System Service LOCATION_SERVICE
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        // Opening the sharedPreferences object
+        sharedPreferences = getSharedPreferences("location", 0);
+
+        // Getting stored latitude if exists else return 0
+        String lat = sharedPreferences.getString("lat", "0");
+
+        // Getting stored longitude if exists else return 0
+        String lng = sharedPreferences.getString("lng", "0");
+
+        // Getting stored zoom level if exists else return 0
+        String zoom = sharedPreferences.getString("zoom", "0");
 
         //---------------------------------------------------------------------------------------------- ambil lokasi user
         /*locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -152,16 +175,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         buatLingkaran(radius,radRadius);
 
         //buat marker
-        buatMarker(target,R.mipmap.market_keris_100,"lokasi Quest 1");
+        //buatMarker(target,R.mipmap.market_keris_100,"lokasi Quest 1");
 
 
         //radius dalam
         //harusnya yang ini  tidak prlu di gambarkan, namun hanya perlu berupa notifikasi
         // bahwa anda telah berada di tempat yg benar
         buatLingkaran(target,radTarget);
+        buat_geofenceProximity(target, radTarget);
 
         //buat marker radius
         // buatMarker(radius, R.mipmap.sample_marker_48, namaQuest);;
+    }
+
+    public void buat_geofenceProximity(LatLng target, int radius){
+
+
+        // This intent will call the activity ProximityActivity
+        Intent proximityIntent = new Intent("in.wptrafficanalyzer.activity.proximity");
+
+        // Creating a pending intent which will be invoked by LocationManager when the specified region is
+        // entered or exited
+        pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, proximityIntent,Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Setting proximity alert
+        // The pending intent will be invoked when the device enters or exits the region 20 meters
+        // away from the marked point
+        // The -1 indicates that, the monitor will not be expired
+        locationManager.addProximityAlert(target.latitude, target.longitude, radius, -1, pendingIntent);
+
+        /** Opening the editor object to write data to sharedPreferences */
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        /** Storing the latitude of the current location to the shared preferences */
+        editor.putString("lat", Double.toString(target.latitude));
+
+        /** Storing the longitude of the current location to the shared preferences */
+        editor.putString("lng", Double.toString(target.longitude));
+
+        /** Saving the values stored in the shared preferences */
+        editor.commit();
+
+
+        Toast.makeText(getBaseContext(), "Proximity Alert is added", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -197,7 +253,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //buat marker niatnya mau dirubah ke custom snippet agar waktu marker di klik
     //muncul gambar dan keterangan
-    public void buatMarker(LatLng target, int lks_mrkr_img, String nama_marker){
+    public static void buatMarker(LatLng target, int lks_mrkr_img, String nama_marker){
         mMap.addMarker(new MarkerOptions()
                 .position(target)
                 .title(nama_marker)
@@ -236,4 +292,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+    public static void kirimMarker(){
+        buatMarker(target,R.mipmap.market_keris_100,"lokasi Quest 1");
+    }
+
+
 }

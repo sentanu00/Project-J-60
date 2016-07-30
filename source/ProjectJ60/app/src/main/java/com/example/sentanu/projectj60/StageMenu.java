@@ -118,8 +118,18 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
 
                 //get data pada itemlist.. hehee.. akhirnya bisa..:D
                 final String id_questx = itemList.get(position).getId_quest();
+                final String judul_questx = itemList.get(position).getJudul_quest();
+                final String status_questx = itemList.get(position).getStatus_quest();
 
-                Toast.makeText(StageMenu.this,"id_quest : "+ id_questx, Toast.LENGTH_SHORT).show();
+                final String la_luarx = itemList.get(position).getLa_luar();
+                final String lo_luarx = itemList.get(position).getLo_luar();
+                final int ra_luarx = Integer.parseInt(itemList.get(position).getRa_luar());
+
+                final String la_dalamx = itemList.get(position).getLa_dalam();
+                final String lo_dalamx = itemList.get(position).getLo_dalam();
+                final int ra_dalamx = Integer.parseInt(itemList.get(position).getRa_dalam());
+
+                Toast.makeText(StageMenu.this,"radius luar : "+ ra_luarx, Toast.LENGTH_SHORT).show();
                 Toast.makeText(StageMenu.this,"position : "+ position, Toast.LENGTH_SHORT).show();
                 Toast.makeText(StageMenu.this,"id       : "+ id, Toast.LENGTH_SHORT).show();
 
@@ -127,17 +137,17 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
                 i.setClass(StageMenu.this, MapsActivity.class);
 
                 // digunakan untuk mengirim data menggunakan intent
-                i.putExtra("nama_quest", "Quest 1");
+                i.putExtra("nama_quest", id_questx);
 
                 //catatan untuk radius atau apapun ber ekstensi "Double" bila akan di share melalui
                 // intent, covert ke "String" terlebih dahulu seperti latRadius dan lonRadius di
                 // bawah ini
-                i.putExtra("latRadius", "-6.9295007");
-                i.putExtra("lonRadius", "107.6080578");
-                i.putExtra("radRadius", 100);
-                i.putExtra("latTarget", "-6.9295007");
-                i.putExtra("lonTarget", "107.6080578");
-                i.putExtra("radTarget", 20);
+                i.putExtra("latRadius", la_luarx);
+                i.putExtra("lonRadius", lo_luarx);
+                i.putExtra("radRadius", ra_luarx);
+                i.putExtra("latTarget", la_dalamx);
+                i.putExtra("lonTarget", lo_dalamx);
+                i.putExtra("radTarget", ra_dalamx);
                 //intent.putExtra("position", position);
                 // Or / And
                 //intent.putExtra("id", id);

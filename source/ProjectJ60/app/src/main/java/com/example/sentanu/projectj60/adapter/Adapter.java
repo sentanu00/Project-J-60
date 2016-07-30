@@ -56,7 +56,7 @@ public class Adapter extends BaseAdapter {
 
         Data data = items.get(position);
 
-        id_quest.setText(data.getId_quest());
+        id_quest.setText("Quest "+data.getId_quest());
         judul_quest.setText(data.getJudul_quest());
         status_quest.setText(data.getStatus_quest());
 
