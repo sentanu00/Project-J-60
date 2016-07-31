@@ -29,12 +29,27 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="Email" />
-<!-- Password Label -->
+    <!-- Password Label -->
     <EditText android:id="@+id/input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password"/>
+
+    <!-- Accountname Label -->
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/input_accountname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+    <!-- status Label -->
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/input_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
 
 <!-- Signup Button -->
 <Button

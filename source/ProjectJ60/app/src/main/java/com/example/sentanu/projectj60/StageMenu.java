@@ -1,7 +1,10 @@
 package com.example.sentanu.projectj60;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,11 +57,13 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
     View dialogView;
-    Button signup_login;
 
-
-    Button signupLogin;
+    Button btn_signupLogin, btn_logout;
     String id_quest, judul_quest, status_quest, la_luar, lo_luar, ra_luar, la_dalam, lo_dalam, ra_dalam;
+
+    //Tipe Variabel boolean untuk cek User Udah Login atau Tidak
+    //Default set dengan False
+    private boolean loggedIn = false;
 
     private static final String TAG = StageMenu.class.getSimpleName();
 
@@ -83,6 +88,7 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
     private static final String TAG_SUCCESS         = "success";
     private static final String TAG_MESSAGE         = "message";
 
+
     String tag_json_obj = "json_obj_req";
 
     @Override
@@ -92,7 +98,8 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
 
         swipe   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         list    = (ListView) findViewById(R.id.list_stage_id);
-        signupLogin = (Button)findViewById(R.id.signup_login);
+        btn_signupLogin = (Button)findViewById(R.id.signup_login);
+        btn_logout = (Button)findViewById(R.id.btn_logout);
 
         // untuk mengisi data dari JSON ke dalam adapter
         adapter = new Adapter(StageMenu.this, itemList);
@@ -156,16 +163,38 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
             }
         });
 
-        signupLogin.setOnClickListener(new View.OnClickListener() {
+        btn_signupLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(StageMenu.this,"hai..:D", Toast.LENGTH_SHORT).show();
-
-
                 Intent i = new Intent();
                 i.setClass(StageMenu.this, signup.class);
 
                 startActivity(i);
+
+            }
+        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Getting out
+                SharedPreferences preferences = getSharedPreferences(AppVar.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                //Getting editor
+                SharedPreferences.Editor editor = preferences.edit();
+
+                // put nilai false untuk login
+                editor.putBoolean(AppVar.LOGGEDIN_SHARED_PREF, false);
+
+                // put nilai untuk username
+                editor.putString(AppVar.EMAIL_SHARED_PREF, "");
+
+                //Simpan ke haredpreferences
+
+                editor.commit();
+
+                // Balik dan tampilkan ke halaman Utama aplikasi jika logout berhasil
+                Intent intent = new Intent(StageMenu.this, StageMenu.class);
+                startActivity(intent);
 
             }
         });
@@ -220,6 +249,46 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
 
         listview.setOnItemClickListener(this);*/
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        new android.support.v7.app.AlertDialog.Builder(this)
+                .setTitle("Keluar?")
+                .setMessage("Benarkah anda ingin keluar?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //MapsActivity.super.onBackPressed();
+                        //finish();
+                        // System.exit(0);
+
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+                        startActivity(intent);
+                        finish();
+                        System.exit(0);
+                    }
+                }).create().show();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        SharedPreferences sharedPreferences=getSharedPreferences(AppVar.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn=sharedPreferences.getBoolean(AppVar.LOGGEDIN_SHARED_PREF, false);
+
+        if (loggedIn){
+            // aksi jika Login Sukses
+            btn_logout.setVisibility(View.VISIBLE);
+            btn_signupLogin.setVisibility(View.GONE);
+
+        }
+    }
+
+
 /*
     // fungsi untuk klik stage pada listview..:D
     @Override

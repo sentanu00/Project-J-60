@@ -27,13 +27,33 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="65dp" />
         <Button
-            android:id="@+id/btn_camera"
+            android:id="@+id/btn_camera_visible"
+            android:visibility="gone"
             android:padding="16dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@mipmap/btn_camera"
+            android:background="@mipmap/btn_camera_visible"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"/>
+        <Button
+            android:id="@+id/btn_camera_disable"
+            android:padding="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/btn_camera_disable"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imV_ket_btn_kamera"
+            android:src="@mipmap/img_ket_btn_kamera"
+            android:visibility="gone"
+            android:layout_above="@+id/btn_camera_visible"
+            android:layout_centerHorizontal="true" />
+
+
     </RelativeLayout>
 
 </LinearLayout>

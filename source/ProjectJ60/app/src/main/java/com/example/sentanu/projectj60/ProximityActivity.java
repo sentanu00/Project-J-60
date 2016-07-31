@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
 import android.widget.Toast;
 
 /**
@@ -28,14 +29,20 @@ public class ProximityActivity extends Activity {
         boolean proximity_entering = getIntent().getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, true);
 
         if(proximity_entering){
-            Toast.makeText(getBaseContext(),"Entering the region"  ,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(),"Entering the region"  ,Toast.LENGTH_LONG).show();
+            MapsActivity.btn_camera_visible.setVisibility(View.VISIBLE);
+            MapsActivity.btn_camera_disable.setVisibility(View.GONE);
+            MapsActivity.imV_ket_btn_kamera.setVisibility(View.VISIBLE);
             MapsActivity.kirimMarker();
             notificationTitle="Proximity - Entry";
             notificationContent="Entered the region";
             tickerMessage = "Entered the region";
 
         }else{
-            Toast.makeText(getBaseContext(),"Exiting the region"  ,Toast.LENGTH_LONG).show();
+            MapsActivity.btn_camera_visible.setVisibility(View.GONE);
+            MapsActivity.btn_camera_disable.setVisibility(View.VISIBLE);
+            MapsActivity.imV_ket_btn_kamera.setVisibility(View.GONE);
+           // Toast.makeText(getBaseContext(),"Exiting the region"  ,Toast.LENGTH_LONG).show();
             notificationTitle="Proximity - Exit";
             notificationContent="Exited the region";
             tickerMessage = "Exited the region";

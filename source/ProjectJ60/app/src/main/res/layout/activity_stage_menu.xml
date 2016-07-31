@@ -45,5 +45,16 @@
                 android:padding="16dp"
                 android:text="Signup or Login"
                 android:typeface="sans"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:text="logout"
+                android:typeface="sans"/>
         </RelativeLayout>
     </LinearLayout>

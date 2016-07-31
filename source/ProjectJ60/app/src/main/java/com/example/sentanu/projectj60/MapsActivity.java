@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,15 +30,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static String namaQuest, latRadius, longiRadius, latTarget, longiTarget;
     private static LatLng radius, target;
-    int radRadius, radTarget;
-    Button GTTarget, GTMyloc, btn_camera;
+    private static int radRadius, radTarget;
+    Button GTTarget, GTMyloc;
+    public static ImageView imV_ket_btn_kamera;
+    public static Button btn_checkin;
+    public static Button btn_camera_visible;
+    public static Button btn_camera_disable;
     LatLng mylocation;//-----------------------------------------------------------------lokasi user
     private LocationManager locManager;
 
 
-    LocationManager locationManager;
-    PendingIntent pendingIntent;
-    SharedPreferences sharedPreferences;
+    private static LocationManager locationManager;
+    private static PendingIntent pendingIntent;
+    private static SharedPreferences sharedPreferences;
 
     private static GoogleMap mMap;
 
@@ -52,7 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         GTTarget = (Button)findViewById(R.id.btn_go_to_target);
         //GTMyloc = (Button)findViewById(R.id.btn_go_to_myloc);
-        btn_camera = (Button)findViewById(R.id.btn_camera);
+        btn_camera_visible = (Button)findViewById(R.id.btn_camera_visible);
+        btn_camera_disable = (Button)findViewById(R.id.btn_camera_disable);
+        imV_ket_btn_kamera= (ImageView) findViewById(R.id.imV_ket_btn_kamera);
 
 
         // Getting LocationManager object from System Service LOCATION_SERVICE
@@ -92,7 +99,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });*/
 
-        btn_camera.setOnClickListener(new View.OnClickListener() {
+        btn_camera_visible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setClass(MapsActivity.this, Kamera_Checkin.class);
+                startActivity(i);
+            }
+        });
+        btn_camera_disable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //GoogleMap.OnMyLocationButtonClickListener;
@@ -131,7 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.radius = new LatLng(Double.parseDouble(latRadius), Double.parseDouble(longiRadius));
         this.target = new LatLng(Double.parseDouble(latTarget), Double.parseDouble(longiTarget));
 
-
+/*
         Toast.makeText(MapsActivity.this, "nama quest : "+namaQuest, Toast.LENGTH_SHORT).show();
         Toast.makeText(MapsActivity.this, "lat Radius : "+latRadius, Toast.LENGTH_SHORT).show();
         Toast.makeText(MapsActivity.this, "Lon Radius : "+longiRadius, Toast.LENGTH_SHORT).show();
@@ -141,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(MapsActivity.this, "rad Target : "+radTarget, Toast.LENGTH_SHORT).show();
         Toast.makeText(MapsActivity.this, "radius : "+radius, Toast.LENGTH_SHORT).show();
         Toast.makeText(MapsActivity.this, "target : "+target, Toast.LENGTH_SHORT).show();
-
+*/
         /* radius adalah variabel untuk lingkaran geofence POI secara meluas atau tidak mendetail
         * target adalah variabel untuk lokasi detil POI*/
 
@@ -179,10 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //radius dalam
-        //harusnya yang ini  tidak prlu di gambarkan, namun hanya perlu berupa notifikasi
-        // bahwa anda telah berada di tempat yg benar
-        buatLingkaran(target,radTarget);
-        buat_geofenceProximity(target, radTarget);
+        buat_geofenceProximity(radius, radRadius);
 
         //buat marker radius
         // buatMarker(radius, R.mipmap.sample_marker_48, namaQuest);;
@@ -217,7 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         editor.commit();
 
 
-        Toast.makeText(getBaseContext(), "Proximity Alert is added", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Proximity Alert is added", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -262,7 +274,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //disini untuk mevisualisasikan radius dalam POI
-    public void buatLingkaran(LatLng target, int radius){
+    public static void buatLingkaran(LatLng target, int radius){
 
         CircleOptions circleOptions = new CircleOptions()
                 .center(new LatLng(target.latitude,target.longitude))
@@ -294,6 +306,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public static void kirimMarker(){
         buatMarker(target,R.mipmap.market_keris_100,"lokasi Quest 1");
+        //harusnya yang ini  tidak prlu di gambarkan, namun hanya perlu berupa notifikasi
+        // bahwa anda telah berada di tempat yg benar
+        buatLingkaran(target,radTarget);
+        //buat_geofenceProximity(target, radTarget);
     }
 
 
