@@ -1,4 +1,13 @@
 <resources>
-    <string name="app_name">Project J60</string>
+    <string name="app_name">Lenko 0.2b</string>
     <string name="title_activity_maps">Map</string>
+    <string name="tutor_1">Tap untuk memulai quest.</string>
+    <string name="tutor_2">Tap untuk melihat posisi kamu.</string>
+    <string name="tutor_3">Tap untuk melihat lokasi tujuan.</string>
+    <string name="tutor_4">Tombol ini muncul jika kamu \n cukup dekat dengan target.</string>
+    <string name="tutor_5">Target kamu ada di dalam lingkaran ini. \n Masuklah ke dalam lingkaran untuk menemukan \n target kamu</string>
+    <string name="tutor_6">Tap untuk melakukan check in</string>
+    <string name="tutor_7"></string>
+    <string name="tutor_8"></string>
+    <string name="tutor_9"></string>
 </resources>

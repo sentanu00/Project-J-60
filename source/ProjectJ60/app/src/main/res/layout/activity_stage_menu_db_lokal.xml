@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="11"
+        tools:context="com.example.sentanu.projectj60.stage_menu_db_lokal">
+
+        <ImageView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:src="@mipmap/sample_1"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_lokal"
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="0dp">
+            <ListView
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:id="@+id/list_stage_id_lokal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/signup_login_lokal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:text="Signup or Login"
+                android:typeface="sans"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_logout_lokal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:padding="16dp"
+                android:text="logout"
+                android:typeface="sans"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_tutor1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"/>
+
+    <TextView
+        android:id="@+id/tv_tutor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tutor_1"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/img_tutorial_atas"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

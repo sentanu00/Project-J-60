@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.sentanu.projectj60.adapter.Adapter;
 import com.example.sentanu.projectj60.app.AppController;
 import com.example.sentanu.projectj60.data.Data;
+import com.example.sentanu.projectj60.db_lokal.db_tmp;
 import com.example.sentanu.projectj60.server.Server;
 
 import org.json.JSONArray;
@@ -47,6 +48,10 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
     String[] id_quest, judul_quest, status_quest;
     String[] gambar;
 */
+
+    db_tmp db;
+
+
 
 
     ListView list;
@@ -95,6 +100,11 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_menu);
+
+        db = new db_tmp(this);
+
+
+
 
         swipe   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         list    = (ListView) findViewById(R.id.list_stage_id);
@@ -249,6 +259,8 @@ public class StageMenu extends AppCompatActivity implements SwipeRefreshLayout.O
 
         listview.setOnItemClickListener(this);*/
     }
+
+
 
     @Override
     public void onBackPressed() {

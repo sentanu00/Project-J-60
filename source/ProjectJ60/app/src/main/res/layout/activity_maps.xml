@@ -52,7 +52,69 @@
             android:visibility="gone"
             android:layout_above="@+id/btn_camera_visible"
             android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/btn_tutor2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000"/>
 
+        <TextView
+            android:id="@+id/tv_tutor2_1"
+            android:padding="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutor_2"
+            android:background="@mipmap/img_tutorial_kanan"
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/tv_tutor2_2"
+            android:padding="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutor_3"
+            android:background="@mipmap/img_tutorial_kanan"
+            android:layout_alignTop="@+id/btn_go_to_target"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_tutor2_3"
+            android:padding="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutor_4"
+            android:background="@mipmap/img_tutorial_bawah"
+            android:layout_above="@+id/btn_camera_disable"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/tv_tutor2_4"
+            android:padding="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutor_5"
+            android:background="@mipmap/img_tutorial_atas"
+            android:layout_above="@+id/btn_camera_disable"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="68dp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/tv_tutor2_5"
+            android:padding="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutor_6"
+            android:background="@mipmap/img_tutorial_bawah"
+            android:layout_above="@+id/btn_camera_visible"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

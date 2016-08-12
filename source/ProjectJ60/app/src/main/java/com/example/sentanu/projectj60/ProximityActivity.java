@@ -32,20 +32,23 @@ public class ProximityActivity extends Activity {
             //Toast.makeText(getBaseContext(),"Entering the region"  ,Toast.LENGTH_LONG).show();
             MapsActivity.btn_camera_visible.setVisibility(View.VISIBLE);
             MapsActivity.btn_camera_disable.setVisibility(View.GONE);
-            MapsActivity.imV_ket_btn_kamera.setVisibility(View.VISIBLE);
+            if(MapsActivity.status_tutor.equals("TRUE")){
+                MapsActivity.tv_tutor2_5.setVisibility(View.VISIBLE);
+            }
             MapsActivity.kirimMarker();
-            notificationTitle="Proximity - Entry";
-            notificationContent="Entered the region";
-            tickerMessage = "Entered the region";
+            Toast.makeText(getBaseContext(),"Entered the region"  ,Toast.LENGTH_LONG).show();
+            //notificationTitle="Proximity - Entry";
+            //notificationContent="Entered the region";
+            //tickerMessage = "Entered the region";
 
         }else{
             MapsActivity.btn_camera_visible.setVisibility(View.GONE);
             MapsActivity.btn_camera_disable.setVisibility(View.VISIBLE);
-            MapsActivity.imV_ket_btn_kamera.setVisibility(View.GONE);
-           // Toast.makeText(getBaseContext(),"Exiting the region"  ,Toast.LENGTH_LONG).show();
-            notificationTitle="Proximity - Exit";
-            notificationContent="Exited the region";
-            tickerMessage = "Exited the region";
+            MapsActivity.tv_tutor2_5.setVisibility(View.GONE);
+            Toast.makeText(getBaseContext(),"Exiting the region"  ,Toast.LENGTH_LONG).show();
+            //notificationTitle="Proximity - Exit";
+            //notificationContent="Exited the region";
+            //tickerMessage = "Exited the region";
         }
 
         Intent notificationIntent = new Intent(getApplicationContext(),notificationView.class);// bila notifikasi di klik maka akan menuju ke

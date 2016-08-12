@@ -51,13 +51,13 @@ public class Adapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_stage_menu, null);
 
         TextView id_quest = (TextView) convertView.findViewById(R.id.id_quest);
-        TextView judul_quest = (TextView) convertView.findViewById(R.id.judul_quest);
+        //TextView judul_quest = (TextView) convertView.findViewById(R.id.judul_quest);
         TextView status_quest = (TextView) convertView.findViewById(R.id.status_quest);
 
         Data data = items.get(position);
 
         id_quest.setText("Quest "+data.getId_quest());
-        judul_quest.setText(data.getJudul_quest());
+        //judul_quest.setText(data.getJudul_quest());
         status_quest.setText(data.getStatus_quest());
 
         return convertView;
