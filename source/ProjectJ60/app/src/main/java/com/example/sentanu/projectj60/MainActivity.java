@@ -10,9 +10,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    
-    //coba satu fungsi
-    public void fungsiPercobaan(){
 
-    }
+public void cobafungsi(){
+    int xx = 10;
+}
 }
